@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset = "utf-8">
+    <meta name = "viewport" content = "width = device-width, initial scale = 1.0">
+    <title>Oẳn tù tì</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: white;
+        }
+        .container{
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: antiquewhite;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .title{
+            font-size: 24px;
+            font-weight:bold;
+            color:darkslategrey;
+        }
+        .subtitle{
+            font-size: 18px;
+            font-weight: bold;
+            color:black;
+            margin-top: 10px;
+        }
+        .content{
+            font-size: 14px;
+            color: #333;
+        }
+        .image{
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .caption{
+            font-style: italic;
+            text-align: center;
+            color: #666;
+        }
+        button{
+            font-size: 18px;
+            padding: 10px 20px;
+            margin:10px;
+            border-radius: 5px;
+            cursor:pointer;
+            border: none;
+            background-color: cadetblue;
+            color:coral;
+        }
+        button:hover{
+            background-color: slateblue;
+        }
+        #result,#welcomeMessage{
+            font-size: 20px;
+            font-weight:bold;
+            margin-top:20px;
+            color:chocolate;
+        }
+        #gameSection{
+            display: none;
+        }
+    </style>
+</head>   
+<body>
+    <div class = "container">
+        <div class = "title"> Trò chơi Oẳn tù tì đem đến trải nghiệm thật thú vị </div>
+        <div class = "subtitle">Chào mừng bạn đến với trò chơi Oẳn tù tì, trò chơi này khá đơn giản và vô cùng hấp dẫn </div>
+        <div class = "content">
+            Oẳn tù tì là trò chơi dân gian, được mọi người yêu thích chơi với nhau. Oẳn tù tì offline thì bạn cần có đứa bạn chơi cùng và giờ đây bạn có thể chơi online với máy tính chỉ một mình bạn chơi, tăng tỉ lệ thắng của bạn. Thật thú vị! 
+            Hãy thử sức với trò chơi ngay bây giờ! Trò chơi rất đơn giản chỉ cần bạn chọn "Kéo" , "Búa" , "Bao" để chơi.
+        </div>
+        <img src="oan-tu-ti.jpg" alt="Hình ảnh trò chơi ThreeBaby đang chơi Oẳn tù tì" class="image">
+        <div class = "caption"> Hình ảnh ThreeBaby đang chơi Oẳn tù tì </div>
+        <div id = "nameInputSection">
+            <h2>Nhập tên của bạn </h2>
+            <input type ="text" id="playerName" placeholder = "Nhập tên của bạn">
+            <button onclick = "startGame()">Bắt đầu chơi</button>
+        </div>
+
+        <p id = "welcomeMessage"></p>
+
+        <div id = "gameSection">
+            <h2> Chơi Oẳn tù tì thôi nào! </h2>
+            <p> Xin mời bạn chọn bất kỳ : "Kéo" , "Búa" , "Bao" để bắt đầu : </p>
+            <button onclick="playGame ('keo')"> ✌Kéo </button>
+            <button onclick = "playGame ('bua')"> ✊Búa </button>
+            <button onclick = "playGame ('bao')" > ✋Bao </button>
+            <p id = "result"></p>
+        </div>
+    </div>
+
+    <script>
+        function startGame (){
+            let name = document.getElementById("playerName").value.trim();
+            if (name === "") {
+                alert("Vui lòng nhập tên của bạn !");
+                return;
+            }
+
+            document.getElementById("welcomeMessage").innerText =`Xin chào ${name}, hãy bắt đầu chơi nào!`;
+            document.getElementById("nameInputSection").style.display="none";
+            document.getElementById("gameSection").style.display = "block";
+        }
+
+        function playGame(playerChoice){
+            const choices = ["keo","bua","bao"];
+            const computerChoice = choices[Math.floor(Math.random()*choices.length)];
+
+            let result = "";
+            if (playerChoice === computerChoice) {
+                result = "Hòa rồi!";
+            } else if (
+                (playerChoice ==="keo" && computerChoice ==="Bao") ||
+                (playerChoice ==="bua" && computerChoice ==="keo") ||
+                (playerChoice ==="bao" && computerChoice ==="bua")
+            ) {
+                result = "Bạn thắng rồi!";
+            } else {
+                result = "Bạn thua!";
+            }
+            document.getElementById("result").innerText = `Bạn chọn ${playerChoice.charAt(0).toUpperCase()+playerChoice.slide(1)} - Máy chọn: ${computerChoice.charAt(0).toUpperCase()+playerChoice.slide(1)} \n Kết quả: ${result}`;
+        }
+        </script>
+</body>
+</html>
